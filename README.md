@@ -19,8 +19,8 @@
 - **Result & Event System** : CSV 파싱 기반 조건/결과 파이프라인 (Data-driven design)
 
 ## 📂 Quick Links
-- [Puzzle Systems](./FateAndAccidy/PuzzleSystem/README.md)  
-- [Interaction Systems](./FateAndAccidy/InteractionSystem/README.md)  
+- [Puzzle Systems](./FateAndAccidy/PuzzleSystems/README.md)  
+- [Interaction Systems](./FateAndAccidy/InteractableObjects/README.md)  
 - [Action Point System](./FateAndAccidy/ActionPointSystem/README.md)  
 - [Room Manager](./FateAndAccidy/RoomManager/README.md)  
 - [Dialogue System](./FourFootsteps/DialogueSystem/README.md)  
