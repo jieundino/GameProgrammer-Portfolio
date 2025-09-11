@@ -17,7 +17,7 @@
 ## 구조 다이어그램
 [ResultManager]  
 └─ results (Dictionary) : CSV 파싱 데이터  
-└─ RegisterExecutable() : 이벤트 오브젝트  등록
+└─ RegisterExecutable() : 이벤트 오브젝트  등록  
 └─ ExecuteResultCoroutine()  
    ├─ Dialogue 시작  
    ├─ 변수 증감/반전  
@@ -28,4 +28,5 @@
 CSV 기반 **데이터 주도 설계(Data-driven design)**로,  
 코드 수정 없이도 기획자가 Result ID를 추가/수정해  
 **연출·변수 조작·씬 전환**을 자유롭게 확장할 수 있는 구조를 만들었습니다.
+
 
