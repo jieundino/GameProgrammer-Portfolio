@@ -16,7 +16,7 @@
 - **Action Point System** : 추상 클래스 기반 행동력/날짜 전환 시스템
 - **Room Manager** : 시점 전환, UI 제어, 튜토리얼 연동
 - **Dialogue System** : 대사 진행, 텍스트 연출, 선택지 분기
-- **Result & Event System** : CSV 파싱 기반 조건/결과 파이프라인 (Data-driven design)
+- **Event & Result System** : CSV 파싱 기반 조건/결과 파이프라인 (Data-driven design)
 
 ## 📂 Quick Links
 - [Puzzle Systems](./FateAndAccidy/PuzzleSystems/README.md)  
@@ -24,5 +24,5 @@
 - [Action Point System](./FateAndAccidy/ActionPointSystem/README.md)  
 - [Room Manager](./FateAndAccidy/RoomManager/README.md)  
 - [Dialogue System](./FourFootsteps/DialogueSystem/README.md)  
-- [Result System](./FourFootsteps/ResultSystem/README.md)  
 - [Event System](./FourFootsteps/EventSystem/README.md)  
+- [Result System](./FourFootsteps/ResultSystem/README.md)  
