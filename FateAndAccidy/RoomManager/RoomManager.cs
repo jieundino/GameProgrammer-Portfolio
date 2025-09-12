@@ -196,16 +196,6 @@ public class RoomManager : MonoBehaviour
     {
         UIManager.Instance.SetUI(eUIGameObjectName.LeftButton, isTrue);
         UIManager.Instance.SetUI(eUIGameObjectName.RightButton, isTrue);
-        
-        //switch (currentSideIndex)
-        //{
-        //    case 1:
-        //        UIManager.Instance.SetUI(eUIGameObjectName.RightButton, false);
-        //        break;
-        //    case 2:
-        //        UIManager.Instance.SetUI(eUIGameObjectName.LeftButton, false);
-        //        break;
-        //}
     }
     
     public void SetButtons()
@@ -228,4 +218,5 @@ public class RoomManager : MonoBehaviour
         
         UIManager.Instance.SetCursorAuto();
     }
+
 }
