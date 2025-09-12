@@ -202,10 +202,6 @@ public class Room2ActionPointManager : ActionPointManager
         UIManager.Instance.SetUI(eUIGameObjectName.LeftButton, false);
         UIManager.Instance.SetUI(eUIGameObjectName.RightButton, false);
 
-        // 다음날이 되고(fade in/out effect 실행) 아침 스크립트 출력
-        //const float totalTime = 3f;
-        //StartCoroutine(ScreenEffect.Instance.DayPass(totalTime));  // fade in/out effect
-
         const float totalTime = 5f;
 
         StartCoroutine(StartNextDayUIChange(nowDayNum));
@@ -250,3 +246,4 @@ public class Room2ActionPointManager : ActionPointManager
         return isChoosingBrokenBearChoice;
     }
 }
+
