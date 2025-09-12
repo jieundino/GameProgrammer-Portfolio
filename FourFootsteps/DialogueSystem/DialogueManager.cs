@@ -379,11 +379,11 @@ public class DialogueManager : MonoBehaviour
 
     private void PlayDialogueSound(DialogueLine dialogueLine)
     {
-        //if (string.IsNullOrWhiteSpace(dialogueLine.SoundID))
-        //    return;
-        //var soundID = "Sound_" + dialogueLine.SoundID;
-        //var soundNum = (int)typeof(Constants).GetField(soundID).GetValue(null);
-        //SoundPlayer.Instance.UISoundPlay_LOOP(soundNum, true);
+        if (string.IsNullOrWhiteSpace(dialogueLine.SoundID))
+            return;
+        var soundID = "Sound_" + dialogueLine.SoundID;
+        var soundNum = (int)typeof(Constants).GetField(soundID).GetValue(null);
+        SoundPlayer.Instance.UISoundPlay_LOOP(soundNum, true);
     }
 
     private void UpdateCharacterImages(DialogueLine dialogueLine)
@@ -431,9 +431,6 @@ public class DialogueManager : MonoBehaviour
 
     private void ChangeDialogueCanvas(string speaker, bool bubbleMode)
     {
-        //if (dialogueType == DialogueType.CENTER)
-        //    dialogueType = DialogueType.PLAYER_TALKING;
-
         if (bubbleMode)
         {
             // 말풍선 모드
@@ -480,8 +477,6 @@ public class DialogueManager : MonoBehaviour
 
         isDialogueActive = false;
         dialogueSet[dialogueType.ToInt()].SetActive(false);
-        //foreach (Image characterImage in characterImages)
-        //    characterImage.gameObject.SetActive(false);
         if (dialogueQueue.Count > 0)  // 큐에 다이얼로그가 들어있으면 다시 대화 시작
         {
             string queuedDialogueID = dialogueQueue.Dequeue();
@@ -606,8 +601,6 @@ public class DialogueManager : MonoBehaviour
         SoundPlayer.Instance.UISoundPlay_LOOP(0, false);
 
         isTyping = false;
-        //if (teddyBearIcons.Length > dialogueType.ToInt()) teddyBearIcons[dialogueType.ToInt()].SetActive(true);
-
         if (isFast)
         {
             typeSpeed *= 1.75f; // 타이핑 속도 되돌려 놓기
@@ -616,7 +609,6 @@ public class DialogueManager : MonoBehaviour
         if (isAuto)
         {
             while (isTyping) yield return null;
-            //yield return new WaitForSeconds(0.25f);
 
             // AUTO 타입에 따라 분기
             if (isAutoDelayed)
@@ -689,45 +681,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     // ---------------------------------------------- Choice methods ----------------------------------------------
-    //private void DisplayChoices(string choiceID)
-    //{
-    //    if (choicesContainer.Length <= dialogueType.ToInt()) return;
-
-    //    foreach (Transform child in choicesContainer[dialogueType.ToInt()])
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-
-    //    List<ChoiceLine> choiceLines = choices[choiceID].Lines;
-
-    //    foreach (ChoiceLine choiceLine in choiceLines)
-    //    {
-    //        var choiceButton = Instantiate(choicePrefab, choicesContainer[dialogueType.ToInt()]).GetComponent<Button>();
-    //        var choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI>();
-
-    //        choiceText.text = choiceLine.GetScript();
-    //        choiceButton.onClick.AddListener(() => OnChoiceSelected(choiceLine.Next));
-    //    }
-    //}
-
-    //private void OnChoiceSelected(string next)
-    //{
-    //    if (dialogues.ContainsKey(next))
-    //    {
-    //        EndDialogue();
-    //        StartDialogue(next);
-    //    }
-    //    else if (EventManager.Instance.events.ContainsKey(next))
-    //    {
-    //        EventManager.Instance.CallEvent(next);
-    //    }
-
-    //    foreach (Transform child in choicesContainer[dialogueType.ToInt()])
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-
-    //}
     private void DisplayChoices(string choiceID)
     {
         if (choicesContainer.Length <= dialogueType.ToInt()) return;
@@ -780,4 +733,5 @@ public class DialogueManager : MonoBehaviour
             return;
         }
     }
+
 }
