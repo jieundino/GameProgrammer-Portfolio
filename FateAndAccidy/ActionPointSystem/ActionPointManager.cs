@@ -6,12 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-//public enum RoomType
-//{
-//    Room1,
-//    Room2
-//}
-
 abstract public class ActionPointManager : MonoBehaviour
 {
     // ************************* temporary members for action points *************************
@@ -513,3 +507,4 @@ abstract public class ActionPointManager : MonoBehaviour
         }    
     }
 }
+
