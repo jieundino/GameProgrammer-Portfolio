@@ -28,5 +28,5 @@
 - [Result System](./FourFootsteps/ResultSystem/README.md)  
 
 ## 🎬 유튜브 시연 영상
-- [**『필연과 우연』**](https://youtu.be/2FwwzZZWBQk) : 멀티엔딩 방탈출 어드벤처 게임 
+- [**『필연과 우연』**](https://youtu.be/kjaH9fDRmMo) : 멀티엔딩 방탈출 어드벤처 게임 
 - [**『네 발자국』**](https://youtu.be/NoYuWTQv6eI) : 반려동물 유기를 주제로 한 2D 내러티브 어드벤처  
