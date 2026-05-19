@@ -12,7 +12,7 @@ public class Room2ActionPointManager : ActionPointManager
     protected override void Awake()
     {
         base.Awake();
-        
+
         maxDayNum = (int)GameManager.Instance.GetVariable("MaxDayNum");
         nowDayNum = (int)GameManager.Instance.GetVariable("NowDayNum");
         actionPointsPerDay = (int)GameManager.Instance.GetVariable("ActionPointsPerDay");
@@ -22,18 +22,32 @@ public class Room2ActionPointManager : ActionPointManager
         CreateActionPointsArray(actionPointsPerDay);
 
         // 처음 방탈출의 actionPoint
-        GameManager.Instance.SetVariable("ActionPoint", actionPointsArray[0, presentHeartIndex]);
+        int dayIndex = nowDayNum - 1;
+        GameManager.Instance.SetVariable("ActionPoint", actionPointsArray[dayIndex, presentHeartIndex]);
 
         GameManager.Instance.AddEventObject("EventRoom2HomeComing");
         GameManager.Instance.AddEventObject("EventRoom2Morning");
+
+       // SaveManager.Instance.SaveGameData();
     }
 
     // create 5 hearts on screen on room start
     public override void CreateHearts()
     {
+        // 하트 생성 전 기존 하트가 만약에 남아있다면 삭제
+        if (heartParent.transform.childCount > 0)
+        {
+            foreach (Transform child in heartParent.transform)
+            {
+                if (child != null)
+                    Destroy(child.gameObject);
+            }
+        }
+
         int actionPoint = actionPointsArray[nowDayNum - 1, presentHeartIndex];
         // 25 action points -> 5 hearts, 24 action points -> 4 hearts, so on...
-        int heartCount = presentHeartIndex + 1;
+        //int heartCount = presentHeartIndex + 1;
+        int heartCount = (actionPoint - 1) % actionPointsPerDay + 1;
 
         // 회복제 먹어서 actionPoint가 2개 더 늘어남
         if (isEatenEnergySupplement)
@@ -90,12 +104,13 @@ public class Room2ActionPointManager : ActionPointManager
         }
 
         // change Day text on screen
-        dayText.text = $"Day {nowDayNum}";
+        dayText.text = $"Day {nowDayNum + ROOM2_DAY_OFFSET}";
 
         if (isEatenEnergySupplement)
             isEatenEnergySupplement = false;
 
         //Debug.Log(heartParent.transform.childCount);
+        SaveManager.Instance.SaveGameData();
     }
 
     public override void DecrementActionPoint()
@@ -164,8 +179,8 @@ public class Room2ActionPointManager : ActionPointManager
             bool isInvestigating = RoomManager.Instance.GetIsInvestigating();
             if (!isDialogueActive && !isInvestigating) RefillHeartsOrEndDay();
             //else if (!isDialogueActive) RefillHeartsOrEndDay();
-            else if (isInvestigating) GameManager.Instance.SetVariable("RefillHeartsOrEndDay", true);
-            else if (isDialogueActive) GameManager.Instance.SetVariable("RefillHeartsOrEndDay", true);
+            else if (isInvestigating) refillHeartsOrEndDayState = true;
+            else if (isDialogueActive) refillHeartsOrEndDayState = true;
         }
 
         SaveManager.Instance.SaveGameData();
@@ -175,6 +190,10 @@ public class Room2ActionPointManager : ActionPointManager
     // 귀가 스크립트 출력 부분
     public override void RefillHeartsOrEndDay()
     {
+        // update Day text on screen
+        if(nowDayNum!= maxDayNum)
+            dayText.text = $"Day {nowDayNum - 1 + ROOM2_DAY_OFFSET}";
+
         // turn off all ImageAndLockPanel objects and zoom out
         RoomManager.Instance.ExitToRoot();
 
@@ -183,14 +202,17 @@ public class Room2ActionPointManager : ActionPointManager
         if (actionPoint == 0)
         {
             EventManager.Instance.CallEvent("EventEndRoom2");
-
+            refillHeartsOrEndDayState = false;
             return;
         }
+
+        // isHomeComingComplete 귀가스크립트 진행 상태 false로 변경
+        GameManager.Instance.SetVariable("isHomeComingComplete", false);
+        SaveManager.Instance.SaveGameData();
+
         // 귀가 스크립트 출력
         EventManager.Instance.CallEvent("EventRoom2HomeComing");
-
-        GameManager.Instance.SetVariable("RefillHeartsOrEndDay", false);
-        // 귀가 스크립트 이후 끝나면 Next의 Event_NextMorningDay fade in/out 이펙트 나옴
+        refillHeartsOrEndDayState = false;
     }
 
     // 외출(아침) 스크립트 출력 부분
@@ -202,9 +224,13 @@ public class Room2ActionPointManager : ActionPointManager
         UIManager.Instance.SetUI(eUIGameObjectName.LeftButton, false);
         UIManager.Instance.SetUI(eUIGameObjectName.RightButton, false);
 
+        // 다음날이 되고(fade in/out effect 실행) 아침 스크립트 출력
+        //const float totalTime = 3f;
+        //StartCoroutine(ScreenEffect.Instance.DayPass(totalTime));  // fade in/out effect
+
         const float totalTime = 5f;
 
-        StartCoroutine(StartNextDayUIChange(nowDayNum));
+        StartCoroutine(StartNextDayUIChange(nowDayNum + ROOM2_DAY_OFFSET));
 
         // 아침 스크립트 출력
         yield return new WaitForSeconds(totalTime);
@@ -212,9 +238,9 @@ public class Room2ActionPointManager : ActionPointManager
 
         yield return new WaitWhile(() => isDayChanging);
 
+        // 여기서 하트 생성 및 다음날로 날짜 업데이트
         StartCoroutine(RefillHearts(0f));
 
-        // 여기서 하트 생성 및 다음날로 날짜 업데이트
         RoomManager.Instance.SetIsInvestigating(false);
         UIManager.Instance.SetCursorAuto();
     }
@@ -246,4 +272,3 @@ public class Room2ActionPointManager : ActionPointManager
         return isChoosingBrokenBearChoice;
     }
 }
-
