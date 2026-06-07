@@ -8,14 +8,14 @@ Unity C# 기반 게임 클라이언트 프로그래머 포트폴리오입니다.
 ## 📌 프로젝트 개요
 
 ### 『필연과 우연』
-<img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/logo%20Images/FateAndAccidy_logo.png?raw=true" width="100"/>
+<img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/FateAndAccidy_logo.png?raw=true" width="100"/>
 
 **멀티엔딩 방탈출 어드벤처 게임** <br>
 퍼즐, 상호작용 오브젝트, 행동력/날짜 시스템, 사운드 시스템 등 핵심 게임플레이 시스템을 설계하고 구현했습니다. <br>
 **Stove, App Store 출시** | 2025 BIC 전시 참여
 
 ### 『네 발자국』
-<img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/logo%20Images/FourFootsteps_logo.png?raw=true" width="100"/>
+<img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/FourFootsteps_logo.png?raw=true" width="100"/>
 
 **반려동물 유기**를 주제로 한 **2D 내러티브 어드벤처** <br>
 대화(Dialogue), 이벤트(Event), 결과(Result) 처리 시스템을 데이터 주도 설계 기반으로 구현했습니다.
@@ -23,7 +23,7 @@ Unity C# 기반 게임 클라이언트 프로그래머 포트폴리오입니다.
 **Stove 출시** | 학술저널 제1저자 게재 (2026.05)
 
 ### 『헤이 치즈!』
-<img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/logo%20Images/HeyCheese_logo.png?raw=true" width="100"/>
+<img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/HeyCheese_logo.png?raw=true" width="100"/>
 
 **경계선 지능 아동의 감정 표현**과 **사회적 관계 형성**을 돕는 **Android 기반 교육용 인터랙티브 콘텐츠**<br>
 에피소드형 미니게임의 진행 흐름, 터치 기반 오브젝트 상호작용, 상태 기반 피드백 구조를 구현했습니다.<br>
