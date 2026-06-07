@@ -12,37 +12,51 @@ Unity C# 기반 게임 클라이언트 프로그래머 포트폴리오입니다.
 
 #### 📱 Screenshots
 
-| ![FateAndAccidy_Screenshot1](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/fate_1.png) | ![FateAndAccidy_Screenshot2](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/fate_2.png) | ![FateAndAccidy_Screenshot3](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/fate_3.png) |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| ![FateAndAccidy_Screenshot1](./readme/fate_1.png) | ![FateAndAccidy_Screenshot2](./readme/fate_2.png) | ![FateAndAccidy_Screenshot3](./readme/fate_3.png) |
+| --- | --- | --- |
 
 **멀티엔딩 방탈출 어드벤처 게임** <br>
 퍼즐, 상호작용 오브젝트, 행동력/날짜 시스템, 사운드 시스템 등 핵심 게임플레이 시스템을 설계하고 구현했습니다. <br>
 **Stove, App Store 출시** | 2025 BIC 전시 참여
+
+<br>
+
+<p align="center">────────────────────────</p>
+
+<br>
 
 ### 『네 발자국』
 <img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/FourFootsteps_logo.png?raw=true" width="100"/>
 
 #### 📱 Screenshots
 
-| ![FourFootsteps_Screenshot1](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/fourfootsteps_1.jpg) | ![FourFootsteps_Screenshot2](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/fourfootsteps_2.jpg) | ![FourFootsteps_Screenshot3](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/fourfootsteps_3.jpg) |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| ![FourFootsteps_Screenshot1](./readme/fourfootsteps_1.jpg) | ![FourFootsteps_Screenshot2](./readme/fourfootsteps_2.jpg) | ![FourFootsteps_Screenshot3](./readme/fourfootsteps_3.jpg) |
+| --- | --- | --- |
 
 **반려동물 유기**를 주제로 한 **2D 내러티브 어드벤처** <br>
 대화(Dialogue), 이벤트(Event), 결과(Result) 처리 시스템을 데이터 주도 설계 기반으로 구현했습니다.
 학술 연구용 플레이 로그 수집 시스템을 직접 설계·구현했습니다.<br>
 **Stove 출시** | 학술저널 제1저자 게재 (2026.05)
 
+<br>
+
+<p align="center">────────────────────────</p>
+
+<br>
+
 ### 『헤이 치즈!』
 <img src="https://github.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/HeyCheese_logo.png?raw=true" width="100"/>
 
 #### 📱 Screenshots
 
-| ![HeyCheese_Screenshot1](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/heycheese_1.jpg) | ![HeyCheese_Screenshot2](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/heycheese_2.jpg) | ![HeyCheese_Screenshot3](https://raw.githubusercontent.com/jieundino/GameProgrammer-Portfolio/blob/main/readme/heycheese_3.jpg) |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| ![HeyCheese_Screenshot1](./readme/heycheese_1.png) | ![HeyCheese_Screenshot2](./readme/heycheese_2.png) | ![HeyCheese_Screenshot3](./readme/heycheese_3.png) |
+| --- | --- | --- |
 
 **경계선 지능 아동의 감정 표현**과 **사회적 관계 형성**을 돕는 **Android 기반 교육용 인터랙티브 콘텐츠**<br>
 에피소드형 미니게임의 진행 흐름, 터치 기반 오브젝트 상호작용, 상태 기반 피드백 구조를 구현했습니다.<br>
 **사용자 테스트용 빌드 제작** | JCCT 학술논문 제2저자 게재
+
+<br>
 
 ---
 
