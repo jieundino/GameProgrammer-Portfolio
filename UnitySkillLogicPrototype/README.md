@@ -255,10 +255,9 @@ Physics 탐색 결과가 `Collider` 단위로 반환되는 점을 고려해 `Has
 
 ## 🎬 Demo Video
 
-- [Combat Logic & UI Feedback](YOUTUBE_COMBAT_UI_URL)
-- [Feature Verification](YOUTUBE_FEATURE_VERIFICATION_URL)
+- [Combat Logic & UI Feedback](https://youtu.be/COhs8v4ZTNY?si=X1HxetiwKpY-we-C)
+- [Feature Verification](https://youtu.be/QM03HsZIwEM?si=Y25z8ThtY_cNN9pa)
 
-> 실제 YouTube URL 업로드 후 위 링크를 교체합니다.
 
 <br>
 
