@@ -62,8 +62,6 @@ public class EnemyHealthBarPresenter : MonoBehaviour
 
         healthBarInstance = Instantiate(healthBarPrefab, EnemyHealthBarRoot.Instance.RectTransform);
 
-        healthSlider = healthBarInstance.GetComponentInChildren<Slider>();
-
         if (healthSlider == null)
         {
             healthSlider = healthBarInstance.GetComponentInChildren<Slider>();

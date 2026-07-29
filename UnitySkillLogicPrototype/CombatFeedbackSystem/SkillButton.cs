@@ -51,7 +51,7 @@ public class SkillButton : MonoBehaviour
         imgCool.fillAmount = runtime.CooldownRatio;
     }
 
-    public void onClicked()
+    public void OnClicked()
     {
         player.TryActivateSkill(slotIndex);
     }

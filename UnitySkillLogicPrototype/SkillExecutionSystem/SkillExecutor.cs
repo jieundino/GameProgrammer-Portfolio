@@ -177,14 +177,14 @@ public class SkillExecutor : MonoBehaviour
                 continue;
             }
 
-            float distnaceSqr = 
+            float distanceSqr = 
                 (candidate.transform.position -
                 attackOrigin.position).sqrMagnitude;
 
-            if(distnaceSqr>=nearestDistanceSqr)
+            if(distanceSqr>=nearestDistanceSqr)
                 continue;
 
-            nearestDistanceSqr = distnaceSqr;
+            nearestDistanceSqr = distanceSqr;
             nearestTarget = candidate;
         }
         return nearestTarget;
