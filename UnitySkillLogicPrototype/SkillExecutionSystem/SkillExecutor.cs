@@ -1,19 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillExecutor : MonoBehaviour
 {
-    [Header("»çÁ¤°Å¸® Ç¥½Ã")]
+    [Header("ì‚¬ì •ê±°ë¦¬ í‘œì‹œ")]
     [SerializeField]
     private SkillRangeIndicator rangeIndicator;
 
     [Header("Targeting")]
     [SerializeField] private Transform attackOrigin;
     [SerializeField] private LayerMask enemyLayer;
-
-    [Tooltip("ÀÚµ¿ ´ë»ó Å½»ö ÃÖ´ë °Å¸®")]
-    [SerializeField] private float targetSearchRadius = 20f;
 
     private readonly Collider[] hitBuffer = new Collider[32];
 
@@ -28,7 +25,11 @@ public class SkillExecutor : MonoBehaviour
         {
             attackOrigin = transform;
         }
-        rangeIndicator = GetComponent<SkillRangeIndicator>();
+
+        if (rangeIndicator == null)
+        {
+            rangeIndicator = GetComponent<SkillRangeIndicator>();
+        }
     }
 
     public bool TryExecute(SOSkill skill, out string resultMessage, out Transform targetTransform)
@@ -37,7 +38,7 @@ public class SkillExecutor : MonoBehaviour
 
         if (skill==null)
         {
-            resultMessage = "SkillData°¡ ¾ø½À´Ï´Ù.";
+            resultMessage = "SkillDataê°€ ì—†ìŠµë‹ˆë‹¤.";
             return false;
         }
 
@@ -50,16 +51,16 @@ public class SkillExecutor : MonoBehaviour
             case SkillType.Area:
                 return ExecuteArea(skill, out resultMessage);
             default:
-                resultMessage = $"Áö¿øÇÏÁö ¾Ê´Â ½ºÅ³ Å¸ÀÔ: {skill.skillType}";
+                resultMessage = $"ì§€ì›í•˜ì§€ ì•ŠëŠ” ìŠ¤í‚¬ íƒ€ì…: {skill.skillType}";
                 return false;
         }
     }
 
-    // ´ÜÀÏ °ø°İ ½ºÅ³ ½ÇÇà
+    // ë‹¨ì¼ ê³µê²© ìŠ¤í‚¬ ì‹¤í–‰
     private bool ExecuteNormal(SOSkill skill, out string resultMessage, out Transform targetTransform)
     {
         targetTransform = null;
-        EnemyHealth target = FindNearestTarget();
+        EnemyHealth target = FindNearestTarget(skill.range);
 
         if(!ValidateTarget(target, skill.range, out resultMessage))
         {
@@ -69,11 +70,11 @@ public class SkillExecutor : MonoBehaviour
         targetTransform = target.transform;
         target.TakeDamage(skill.damage);
         
-        resultMessage = $"[´ÜÀÏ °ø°İ] {target.name}¿¡°Ô {skill.damage}ÀÇ ÇÇÇØ¸¦ ÀÔÇû½À´Ï´Ù.";
+        resultMessage = $"[ë‹¨ì¼ ê³µê²©] {target.name}ì—ê²Œ {skill.damage}ì˜ í”¼í•´ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤.";
         return true;
     }
 
-    // Áö¼Ó ÇÇÇØ ½ºÅ³ ½ÇÇà
+    // ì§€ì† í”¼í•´ ìŠ¤í‚¬ ì‹¤í–‰
     private bool ExecuteDot(SOSkill skill, out string resultMessage, out Transform targetTransform)
     {
         Vector3 areaCenter =
@@ -81,30 +82,23 @@ public class SkillExecutor : MonoBehaviour
 
         targetTransform = null;
 
-        EnemyHealth target = FindNearestTarget();
+        EnemyHealth target = FindNearestTarget(skill.range);
 
         if(!ValidateTarget(target, skill.range, out resultMessage))
         {
             return false;
         }
-        // ÃÖÃÊ Å¸°İ ÇÇÇØ°¡ ¼³Á¤µÇ¾î ÀÖÀ¸¸é Àû¿ë
-        if(skill.damage > 0f)
-        {
-            target.TakeDamage(skill.damage);
-        }
 
         targetTransform = target.transform;
         DotStatusEffect dotEffect = target.GetComponent<DotStatusEffect>();
 
-        rangeIndicator?.ShowCircle(areaCenter, skill.areaRadius, 1.5f);
-
         if (dotEffect == null)
         {
-            resultMessage = $"{target.name}¿¡°Ô DotStatusEffect ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.";
+            resultMessage = $"{target.name}ì—ê²Œ DotStatusEffect ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.";
             return false;   
         }
 
-        // ¸ğµç ½ÇÇà Á¶°Ç È®ÀÎ ÈÄ Effect Àû¿ë
+        // ëª¨ë“  ì‹¤í–‰ ì¡°ê±´ í™•ì¸ í›„ Effect ì ìš©
         if (skill.damage > 0f)
         {
             target.TakeDamage(skill.damage);
@@ -112,19 +106,22 @@ public class SkillExecutor : MonoBehaviour
 
         dotEffect.ApplyDot(skill.dotDamagePerTick, skill.dotDuration, skill.dotInterval);
 
-        resultMessage = $"[Áö¼Ó ÇÇÇØ] {target.name}¿¡°Ô Áö¼Ó ÇÇÇØ Àû¿ë: " +
+        // 1.5ì´ˆ ì´í›„ ë²”ìœ„ í‘œì‹œ í•´ì œ (ê¸°ë³¸ 0.5ì´ˆ)
+        rangeIndicator?.ShowCircle(areaCenter, skill.areaRadius, 1.5f);
+
+        resultMessage = $"[ì§€ì† í”¼í•´] {target.name}ì—ê²Œ ì§€ì† í”¼í•´ ì ìš©: " +
             $"{skill.dotDamagePerTick}/tick, " +
-            $"{skill.dotDuration}ÃÊ";
+            $"{skill.dotDuration}ì´ˆ";
 
         return true;
     }
 
-    // ¹üÀ§ °ø°İ ½ºÅ³ ½ÇÇà
-    // Spin AttackÀº ÀûÀÌ ¾ø¾îµµ ½ºÅ³ ÀÚÃ¼´Â ¹ßµ¿ÇÑ °ÍÀ¸·Î Ã³¸®.
-    // µû¶ó¼­ ÀûÀÌ 0¸íÀÌ¾îµµ true·Î ¹İÈ¯ÇÔ
+    // ë²”ìœ„ ê³µê²© ìŠ¤í‚¬ ì‹¤í–‰
+    // Spin Attackì€ ì ì´ ì—†ì–´ë„ ìŠ¤í‚¬ ìì²´ëŠ” ë°œë™í•œ ê²ƒìœ¼ë¡œ ì²˜ë¦¬.
+    // ë”°ë¼ì„œ ì ì´ 0ëª…ì´ì–´ë„ trueë¡œ ë°˜í™˜í•¨
     private bool ExecuteArea(SOSkill skill, out string resultMessage)
     {
-        // ÇÃ·¹ÀÌ¾î ÁÖº¯ range °Å¸®ÀÇ ÁöÁ¡À» ¹üÀ§ °ø°İ Áß½ÉÀ¸·Î »ç¿ë
+        // í”Œë ˆì´ì–´ ì£¼ë³€ range ê±°ë¦¬ì˜ ì§€ì ì„ ë²”ìœ„ ê³µê²© ì¤‘ì‹¬ìœ¼ë¡œ ì‚¬ìš©
         Vector3 areaCenter = 
             attackOrigin.position + Vector3.up * 0.5f;
 
@@ -156,8 +153,8 @@ public class SkillExecutor : MonoBehaviour
             target.TakeDamage(skill.damage);
         }
 
-        resultMessage = $"[¹üÀ§ °ø°İ] {uniqueTargets.Count}¸íÀÇ Àû¿¡°Ô " +
-            $"{skill.damage}ÀÇ ¹üÀ§ ÇÇÇØ";
+        resultMessage = $"[ë²”ìœ„ ê³µê²©] {uniqueTargets.Count}ëª…ì˜ ì ì—ê²Œ " +
+            $"{skill.damage}ì˜ ë²”ìœ„ í”¼í•´";
 
         lastAreaCenter = areaCenter;
         lastAreaRadius = skill.areaRadius;
@@ -166,33 +163,36 @@ public class SkillExecutor : MonoBehaviour
     }
 
 
-    private EnemyHealth FindNearestTarget()
+    private EnemyHealth FindNearestTarget(float searchRadius)
     {
         int hitCount = Physics.OverlapSphereNonAlloc(
-            attackOrigin.position, targetSearchRadius, hitBuffer, enemyLayer);
+            attackOrigin.position,
+            searchRadius,
+            hitBuffer,
+            enemyLayer);
 
         EnemyHealth nearestTarget = null;
         float nearestDistanceSqr = float.MaxValue;
 
-        for(int i=0;i< hitCount; i++)
+        for (int i = 0; i < hitCount; i++)
         {
-            EnemyHealth candidate = hitBuffer[i].GetComponentInParent<EnemyHealth>();
-            
-            if(candidate ==null|| candidate.IsDead)
-            {
+            EnemyHealth candidate =
+                hitBuffer[i].GetComponentInParent<EnemyHealth>();
+
+            if (candidate == null || candidate.IsDead)
                 continue;
-            }
 
-            float distanceSqr = 
+            float distanceSqr =
                 (candidate.transform.position -
-                attackOrigin.position).sqrMagnitude;
+                 attackOrigin.position).sqrMagnitude;
 
-            if(distanceSqr>=nearestDistanceSqr)
+            if (distanceSqr >= nearestDistanceSqr)
                 continue;
 
             nearestDistanceSqr = distanceSqr;
             nearestTarget = candidate;
         }
+
         return nearestTarget;
     }
 
@@ -200,13 +200,13 @@ public class SkillExecutor : MonoBehaviour
     {
         if (target ==null)
         {
-            failureMessage = "´ë»óÀ» Ã£Áö ¸øÇß½À´Ï´Ù.";
+            failureMessage = "ëŒ€ìƒì„ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
             return false;
         }
 
         if (target.IsDead)
         {
-            failureMessage = $"{target.name}Àº ÀÌ¹Ì »ç¸ÁÇÑ ´ë»óÀÔ´Ï´Ù.";
+            failureMessage = $"{target.name}ì€ ì´ë¯¸ ì‚¬ë§í•œ ëŒ€ìƒì…ë‹ˆë‹¤.";
             return false;
         }
 
@@ -219,8 +219,8 @@ public class SkillExecutor : MonoBehaviour
         {
             float distance = Mathf.Sqrt(distanceSqr);
 
-            failureMessage = $"{target.name}Àº °ø°İ ¹üÀ§¸¦ ¹ş¾î³µ½À´Ï´Ù. " +
-                $"(°Å¸®: {distance:F2}, Çã¿ë °Å¸®: {allowedRange:F2})";
+            failureMessage = $"{target.name}ì€ ê³µê²© ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤. " +
+                $"(ê±°ë¦¬: {distance:F2}, í—ˆìš© ê±°ë¦¬: {allowedRange:F2})";
             return false;
         }
 

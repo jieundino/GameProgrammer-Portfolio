@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,8 +37,8 @@ public class EnemyHealth : MonoBehaviour
         );
 
         Debug.Log(
-            $"[{name}] {damage} ÇÇÇØ / " +
-            $"³²Àº Ã¼·Â: {CurrentHealth}");
+            $"[{name}] {damage} í”¼í•´ / " +
+            $"ë‚¨ì€ ì²´ë ¥: {CurrentHealth}");
 
         if (IsDead)
             Die();
@@ -46,7 +46,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log($"[{name}] »ç¸Á");
+        Debug.Log($"[{name}] ì‚¬ë§");
 
         foreach(Collider col in colliders)
         {
@@ -57,13 +57,11 @@ public class EnemyHealth : MonoBehaviour
 
         if(anim != null)
             anim.Play("Die");
-
-        gameObject.GetComponent<Collider>().enabled = false;
     }
 
-    public void HideInScnene()
+    public void HideInScene()
     {
-        // 1ÃÊ ÈÄ ºñÈ°¼ºÈ­ ÇÏ´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // 1ì´ˆ í›„ ë¹„í™œì„±í™” í•˜ëŠ” ì½”ë£¨í‹´ ì‹œì‘
         StartCoroutine(HideAfterDelay(1f));
     }
 

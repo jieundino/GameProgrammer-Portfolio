@@ -1,14 +1,14 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // PlayerSkillController
-//¡æ ½ºÅ³¿¡ ´ëÀÀÇÏ´Â SkillRuntime Å½»ö
-//¡æ IsReady °Ë»ç
-//¡æ ½ÇÁ¦ ½ºÅ³ ½ÇÇà
-//¡æ ½ÇÇà ¼º°ø ½Ã StartCooldown()
-//¡æ Update¿¡¼­ ¸Å ÇÁ·¹ÀÓ Tick()
+//â†’ ìŠ¤í‚¬ì— ëŒ€ì‘í•˜ëŠ” SkillRuntime íƒìƒ‰
+//â†’ IsReady ê²€ì‚¬
+//â†’ ì‹¤ì œ ìŠ¤í‚¬ ì‹¤í–‰
+//â†’ ì‹¤í–‰ ì„±ê³µ ì‹œ StartCooldown()
+//â†’ Updateì—ì„œ ë§¤ í”„ë ˆì„ Tick()
 
 public class PlayerSkillController : MonoBehaviour
 {
@@ -28,7 +28,10 @@ public class PlayerSkillController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
 
-        playerMovement = GetComponent<PlayerMovement>();
+        if (playerMovement == null)
+        {
+            playerMovement = GetComponent<PlayerMovement>();
+        }
 
         if (skillExecutor == null)
         {
@@ -63,6 +66,12 @@ public class PlayerSkillController : MonoBehaviour
 
     private void InitializeSkills()
     {
+        if (equippedSkills == null)
+        {
+            Debug.LogWarning("EquippedSkillsê°€ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+            return;
+        }
+
         skillRuntimes.Clear();
 
         foreach (SOSkill skill in equippedSkills)
@@ -89,7 +98,7 @@ public class PlayerSkillController : MonoBehaviour
     {
         if ((slotIndex<0||slotIndex>=skillRuntimes.Count))
         {
-            Debug.LogWarning($"À¯È¿ÇÏÁö ¾ÊÀº ½ºÅ³ ½½·ÔÀÔ´Ï´Ù: {slotIndex}");
+            Debug.LogWarning($"ìœ íš¨í•˜ì§€ ì•Šì€ ìŠ¤í‚¬ ìŠ¬ë¡¯ì…ë‹ˆë‹¤: {slotIndex}");
             return null;
         }
         return skillRuntimes[slotIndex];
@@ -101,20 +110,20 @@ public class PlayerSkillController : MonoBehaviour
 
         if(runtime == null)
         {
-            Debug.Log($"½ºÅ³ ½½·Ô {skillIndex + 1}ÀÌ ºñ¾î ÀÖ½À´Ï´Ù.");
+            Debug.Log($"ìŠ¤í‚¬ ìŠ¬ë¡¯ {skillIndex + 1}ì´ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.");
             return;
         }
 
         if(isUsingSkill)
         {
-            Debug.Log("[Skill Failed] ½ºÅ³ »ç¿ë Áß¿¡´Â ´Ù¸¥ ½ºÅ³À» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            Debug.Log("[Skill Failed] ìŠ¤í‚¬ ì‚¬ìš© ì¤‘ì—ëŠ” ë‹¤ë¥¸ ìŠ¤í‚¬ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
         if (!runtime.IsReady)
         {
-            Debug.Log($"{runtime.SkillData.name} ÄğÅ¸ÀÓ: " +
-                $"{runtime.RemainingCooldown:F1}ÃÊ");
+            Debug.Log($"{runtime.SkillData.name} ì¿¨íƒ€ì„: " +
+                $"{runtime.RemainingCooldown:F1}ì´ˆ");
 
             return;
         }
@@ -131,13 +140,13 @@ public class PlayerSkillController : MonoBehaviour
     {
         if (skill == null)
         {
-            Debug.LogWarning("[Skill Failed] SkillData ¾øÀ½.");
+            Debug.LogWarning("[Skill Failed] SkillData ì—†ìŒ.");
             return false;
         }
 
         if(skillExecutor == null)
         {
-            Debug.LogWarning("[Skill Failed] SkillExecutor ¾øÀ½.");
+            Debug.LogWarning("[Skill Failed] SkillExecutor ì—†ìŒ.");
             return false;
         }
 
@@ -173,7 +182,7 @@ public class PlayerSkillController : MonoBehaviour
         return true;
     }
 
-    // ½ºÅ³ ¾Ö´Ï¸ŞÀÌ¼Ç Á¾·á ÇÁ·¹ÀÓ¿¡ ÀÌº¥Æ® È£Ãâ
+    // ìŠ¤í‚¬ ì• ë‹ˆë©”ì´ì…˜ ì¢…ë£Œ í”„ë ˆì„ì— ì´ë²¤íŠ¸ í˜¸ì¶œ
     public void OnSkillAnimationEnd()
     {
         isUsingSkill = false;

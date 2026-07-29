@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,15 +12,15 @@ public class FollowCamera : MonoBehaviour
     [SerializeField] private float heightOffset = 1.5f;
 
     [Header("Camera Rotation")]
-    public float sensitivity = 100f; // ¸¶¿ì½º °¨µµ Á¶Àı º¯¼ö
+    public float sensitivity = 100f; // ë§ˆìš°ìŠ¤ ê°ë„ ì¡°ì ˆ ë³€ìˆ˜
 
-    // ÁÂ¿ì È¸Àü = YÃà È¸Àü
+    // ì¢Œìš° íšŒì „ = Yì¶• íšŒì „
     private float yaw = 0f;
-    // »óÇÏ È¸Àü = XÃà È¸Àü
+    // ìƒí•˜ íšŒì „ = Xì¶• íšŒì „
     private float pitch = 20f;
 
-    [SerializeField] private float minPitch = -10f; // ÃÖ¼Ò »óÇÏ È¸Àü °¢µµ
-    [SerializeField] private float maxPitch = 60f;  // ÃÖ´ë »óÇÏ È¸Àü °¢µµ
+    [SerializeField] private float minPitch = -10f; // ìµœì†Œ ìƒí•˜ íšŒì „ ê°ë„
+    [SerializeField] private float maxPitch = 60f;  // ìµœëŒ€ ìƒí•˜ íšŒì „ ê°ë„
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class FollowCamera : MonoBehaviour
 
     private void RotateCamera()
     {
-        // ¿ìÅ¬¸¯ Áß¿¡¸¸ Ä«¸Ş¶ó È¸Àü
+        // ìš°í´ë¦­ ì¤‘ì—ë§Œ ì¹´ë©”ë¼ íšŒì „
         if(!Input.GetMouseButton(1))
         {
             return;
@@ -64,8 +64,8 @@ public class FollowCamera : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
-        // ÇÃ·¹ÀÌ¾îº¸´Ù heightOffset ¸¸Å­ À§¿¡ ÀÖ´Â ÁöÁ¡À»
-        // Ä«¸Ş¶ó È¸Àü Áß½ÉÀ¸·Î »ç¿ë
+        // í”Œë ˆì´ì–´ë³´ë‹¤ heightOffset ë§Œí¼ ìœ„ì— ìˆëŠ” ì§€ì ì„
+        // ì¹´ë©”ë¼ íšŒì „ ì¤‘ì‹¬ìœ¼ë¡œ ì‚¬ìš©
         Vector3 pivotPosition = target.position + Vector3.up * heightOffset;
 
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);

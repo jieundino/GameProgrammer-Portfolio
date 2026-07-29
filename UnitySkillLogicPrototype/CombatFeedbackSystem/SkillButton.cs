@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,11 +29,20 @@ public class SkillButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (player == null)
+        {
+            Debug.LogError(
+                "PlayerSkillControllerë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+
+            gameObject.SetActive(false);
+            return;
+        }
+
         runtime = player.GetSkillRuntime(slotIndex);
 
         if (runtime == null)
         {
-            Debug.LogError($"SlotIndex {slotIndex}¿¡ ÇØ´çÇÏ´Â SkillRuntimeÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError($"SlotIndex {slotIndex}ì— í•´ë‹¹í•˜ëŠ” SkillRuntimeì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             gameObject.SetActive(false);
             return;
         }

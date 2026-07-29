@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -88,7 +88,7 @@ public class EnemyHealthBarPresenter : MonoBehaviour
 
         Vector3 screenPosition = targetCamera.WorldToScreenPoint(worldPosition);
 
-        // z°¡ 0 ÀÌÇÏÀÌ¸é Ä«¸Þ¶ó µÚ¿¡ ÀÖ´Â ¿ÀºêÁ§Æ®
+        // zê°€ 0 ì´í•˜ì´ë©´ ì¹´ë©”ë¼ ë’¤ì— ìžˆëŠ” ì˜¤ë¸Œì íŠ¸
         bool isInFrontOfCamera = screenPosition.z > 0;
 
         healthBarInstance.gameObject.SetActive(isInFrontOfCamera && shouldShow);

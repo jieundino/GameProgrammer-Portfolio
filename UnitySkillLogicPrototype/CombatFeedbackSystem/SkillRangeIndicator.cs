@@ -23,6 +23,12 @@ public class SkillRangeIndicator : MonoBehaviour
             return;
         }
 
+        if (hideCoroutine != null)
+        {
+            StopCoroutine(hideCoroutine);
+            hideCoroutine = null;
+        }
+
         circleIndicator.SetActive(true);
 
         circleIndicator.transform.position = center + Vector3.up * 0.02f;

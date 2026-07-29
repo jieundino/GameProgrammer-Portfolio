@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,20 +23,20 @@ public class SOSkill : ScriptableObject
     [Header("Damage")]
     public float damage;
 
-    [Tooltip("´ÜÀÏ ´ë»ó ¹× Áö¼Ó ÇÇÇØ ½ºÅ³ÀÇ »ç¿ë °¡´É °Å¸®")]
+    [Tooltip("ë‹¨ì¼ ëŒ€ìƒ ë° ì§€ì† í”¼í•´ ìŠ¤í‚¬ì˜ ì‚¬ìš© ê°€ëŠ¥ ê±°ë¦¬")]
     public float range = 5f;
 
     [Header("Area Skill")]
-    [Tooltip("¹üÀ§ °ø°İÀÇ ¹İ°æ")]
+    [Tooltip("ë²”ìœ„ ê³µê²©ì˜ ë°˜ê²½")]
     public float areaRadius = 2.5f;
 
     [Header("Dot Skill")]
-    [Tooltip("Æ½´ç Áö¼Ó ÇÇÇØ")]
+    [Tooltip("í‹±ë‹¹ ì§€ì† í”¼í•´")]
     public float dotDamagePerTick = 2f;
 
-    [Tooltip("Áö¼Ó ÇÇÇØ ÃÑ Áö¼Ó ½Ã°£")]
+    [Tooltip("ì§€ì† í”¼í•´ ì´ ì§€ì† ì‹œê°„")]
     public float dotDuration = 10f;
 
-    [Tooltip("Áö¼Ó ÇÇÇØ Æ½ °£°İ")]
+    [Tooltip("ì§€ì† í”¼í•´ í‹± ê°„ê²©")]
     public float dotInterval = 1f;
 }

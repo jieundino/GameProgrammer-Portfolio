@@ -270,6 +270,7 @@ Physics 탐색 결과가 `Collider` 단위로 반환되는 점을 고려해 `Has
 - Buff / Debuff / Stack 기반 상태 효과 미구현
 - Targeting과 Effect Execution이 `SkillExecutor`에 함께 존재
 - 자원 소비, 캐스팅, Line of Sight 조건 미구현
+- 스킬 사용 종료 상태는 Animation Event 호출에 의존
 - SkillButton은 Update에서 Runtime 상태를 조회해 UI 갱신
 - 범위 Indicator의 중복 호출 정책은 추가 보완 가능
 

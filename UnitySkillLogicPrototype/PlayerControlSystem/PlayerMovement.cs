@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -74,13 +74,13 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // Ä«¸Ş¶ó Àü¹æ ¹æÇâ
+        // ì¹´ë©”ë¼ ì „ë°© ë°©í–¥
         Vector3 cameraForward = cameraTransform.forward;
 
-        // Ä«¸Ş¶ó ¿À¸¥ÂÊ ¹æÇâ
+        // ì¹´ë©”ë¼ ì˜¤ë¥¸ìª½ ë°©í–¥
         Vector3 cameraRight = cameraTransform.right;
 
-        // »óÇÏ Ä«¸Ş¶ó °¢µµ´Â ÀÌµ¿¿¡ ¹İ¿µX
+        // ìƒí•˜ ì¹´ë©”ë¼ ê°ë„ëŠ” ì´ë™ì— ë°˜ì˜X
         cameraForward.y = 0f;
         cameraRight.y = 0f;
 
@@ -104,14 +104,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotate()
     {
-        // ¿ìÅ¬¸¯ Áß¿¡´Â Ä«¸Ş¶ó ¹æÇâ À¯Áö
+        // ìš°í´ë¦­ ì¤‘ì—ëŠ” ì¹´ë©”ë¼ ë°©í–¥ ìœ ì§€
         if (Input.GetMouseButton(1))
         {
             FaceCameraDirection();
             return;
         }
 
-        // ÀÔ·Â ¾øÀ¸¸é È¸ÀüÇÏÁö ¾ÊÀ½
+        // ì…ë ¥ ì—†ìœ¼ë©´ íšŒì „í•˜ì§€ ì•ŠìŒ
         if (moveVec.sqrMagnitude <= 0.001f)
         {
             return;
@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         Quaternion targetRotation =
             Quaternion.LookRotation(moveVec, Vector3.up);
 
-        // ÇöÀç È¸Àü°ª¿¡¼­ ¸ñÇ¥ È¸Àü°ª±îÁö º¸°£
+        // í˜„ì¬ íšŒì „ê°’ì—ì„œ ëª©í‘œ íšŒì „ê°’ê¹Œì§€ ë³´ê°„
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             targetRotation,
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
         jumpRequested = false;
 
-        // 2´Ü Á¡ÇÁ Â÷´Ü
+        // 2ë‹¨ ì í”„ ì°¨ë‹¨
         if (isJump) return;
 
         rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    // °ø°İ ½Ã, Enemy°¡ ÀÖ´Â ¹æÇâÀ¸·Î Áï½Ã È¸Àü
+    // ê³µê²© ì‹œ, Enemyê°€ ìˆëŠ” ë°©í–¥ìœ¼ë¡œ ì¦‰ì‹œ íšŒì „
     public void FaceTargetInstant(Transform target)
     {
         if(target ==null)
@@ -169,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 directionToTarget = target.position - transform.position;
 
-        directionToTarget.y = 0f; // ¼öÁ÷ ¹æÇâ ¹«½Ã
+        directionToTarget.y = 0f; // ìˆ˜ì§ ë°©í–¥ ë¬´ì‹œ
 
         if (directionToTarget.sqrMagnitude <= 0.001f)
         {
@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 cameraForward = cameraTransform.forward;
 
-        // Ä«¸Ş¶ó »óÇÏ °¢µµ´Â ¹İ¿µX
+        // ì¹´ë©”ë¼ ìƒí•˜ ê°ë„ëŠ” ë°˜ì˜X
         cameraForward.y = 0f;
 
         if (cameraForward.sqrMagnitude <= 0.001f) return;
