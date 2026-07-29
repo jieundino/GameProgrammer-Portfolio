@@ -96,12 +96,18 @@ public class SkillExecutor : MonoBehaviour
         targetTransform = target.transform;
         DotStatusEffect dotEffect = target.GetComponent<DotStatusEffect>();
 
-        rangeIndicator.ShowCircle(areaCenter, skill.areaRadius, 1.5f);
+        rangeIndicator?.ShowCircle(areaCenter, skill.areaRadius, 1.5f);
 
         if (dotEffect == null)
         {
             resultMessage = $"{target.name}에게 DotStatusEffect 컴포넌트가 없습니다.";
             return false;   
+        }
+
+        // 모든 실행 조건 확인 후 Effect 적용
+        if (skill.damage > 0f)
+        {
+            target.TakeDamage(skill.damage);
         }
 
         dotEffect.ApplyDot(skill.dotDamagePerTick, skill.dotDuration, skill.dotInterval);
@@ -122,7 +128,7 @@ public class SkillExecutor : MonoBehaviour
         Vector3 areaCenter = 
             attackOrigin.position + Vector3.up * 0.5f;
 
-        rangeIndicator.ShowCircle(areaCenter, skill.areaRadius);
+        rangeIndicator?.ShowCircle(areaCenter, skill.areaRadius);
 
         int hitCount = Physics.OverlapSphereNonAlloc(
             areaCenter, skill.areaRadius, hitBuffer, enemyLayer);
